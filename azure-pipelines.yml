@@ -15,10 +15,6 @@ steps:
 - task: DockerInstaller@0
   inputs:
     dockerVersion: '17.09.0-ce'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'harbor-acme'
-    command: 'login'
 
 - script: |
     pwd
@@ -28,6 +24,7 @@ steps:
     export USER=acme
     ./gradlew clean build bootBuildImage -x test 
     docker images
+    docker login harbor.haas-451.pez.pivotal.io -u admin -p 9U0IwJXfcX
     docker tag acme/quotes-service:latest harbor.haas-451.pez.pivotal.io/dev/quotes-service:latest
     docker tag acme/user-service:latest harbor.haas-451.pez.pivotal.io/dev/user-service:latest
     docker tag acme/portfolio-service:latest harbor.haas-451.pez.pivotal.io/dev/portfolio-service:latest
