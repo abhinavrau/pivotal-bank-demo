@@ -14,6 +14,6 @@ steps:
 - script: |
     pwd
     ls -al
-    gradlew clean build bootBuildImage -x test 
+    ./gradlew clean build bootBuildImage -x test 
   displayName: 'Build the tanzu bank services'
 
