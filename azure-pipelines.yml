@@ -17,7 +17,7 @@ steps:
 
 - script: |
     pwd
-    sudo apt-get install openjdk-8-jdk
+    apt-get install openjdk-8-jdk
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
     ./gradlew clean build bootBuildImage -x test 
   displayName: 'Build the tanzu bank services'
