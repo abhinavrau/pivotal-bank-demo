@@ -17,6 +17,7 @@ steps:
 
 - script: |
     pwd
+    apt-get update
     apt-get install openjdk-8-jdk
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
     ./gradlew clean build bootBuildImage -x test 
