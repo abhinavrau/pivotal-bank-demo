@@ -11,8 +11,9 @@ pool:
   name: 'Default'
 
 steps: 
-- script: | 
-    cd scripts_k8s 
-    ./2_build-all.sh
+- script: |
+    pwd
+    ls -al
+    gradlew clean build bootBuildImage -x test 
   displayName: 'Build the tanzu bank services'
 
