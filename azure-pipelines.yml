@@ -1,9 +1,5 @@
 # Starter pipeline
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '8'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -16,9 +12,15 @@ pool:
   name: 'Default'
 
 steps: 
+
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '8'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
 - script: |
     pwd
     ls -al
     ./gradlew clean build bootBuildImage -x test 
   displayName: 'Build the tanzu bank services'
-
