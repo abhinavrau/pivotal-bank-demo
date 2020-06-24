@@ -10,7 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
   name: 'Default'
 
-steps:
-- script: ./scripts_k8s/2_build-all.sh
+steps: 
+- script: | 
+    cd scripts_k8s 
+    ./2_build-all.sh
   displayName: 'Build the tanzu bank services'
 
