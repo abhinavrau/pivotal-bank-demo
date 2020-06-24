@@ -13,14 +13,11 @@ pool:
 
 steps: 
 
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '8'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+
 
 - script: |
     pwd
-    ls -al
+    sudo apt-get install openjdk-8-jdk
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
     ./gradlew clean build bootBuildImage -x test 
   displayName: 'Build the tanzu bank services'
