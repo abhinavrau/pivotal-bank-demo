@@ -12,13 +12,33 @@ pool:
   name: 'Default'
 
 steps: 
-
-
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'harbor-acme'
+    command: 'login'
 
 - script: |
     pwd
     apt-get update
     apt-get install openjdk-8-jdk
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    export USER=acme
     ./gradlew clean build bootBuildImage -x test 
+    docker images
+    docker tag acme/quotes-service:latest harbor.haas-451.pez.pivotal.io/dev/quotes-service:latest
+    docker tag acme/user-service:latest harbor.haas-451.pez.pivotal.io/dev/user-service:latest
+    docker tag acme/portfolio-service:latest harbor.haas-451.pez.pivotal.io/dev/portfolio-service:latest
+    docker tag acme/accounts-service:latest harbor.haas-451.pez.pivotal.io/dev/accounts-service:latest
+    docker tag acme/web-ui:latest harbor.haas-451.pez.pivotal.io/dev/web-ui:latest
+    docker push harbor.haas-451.pez.pivotal.io/dev/quotes-service:latest
+    docker push harbor.haas-451.pez.pivotal.io/dev/user-service:latest
+    docker push harbor.haas-451.pez.pivotal.io/dev/portfolio-service:latest
+    docker push harbor.haas-451.pez.pivotal.io/dev/accounts-service:latest
+    docker push harbor.haas-451.pez.pivotal.io/dev/web-ui:latest
+    
+
+    
   displayName: 'Build the tanzu bank services'
